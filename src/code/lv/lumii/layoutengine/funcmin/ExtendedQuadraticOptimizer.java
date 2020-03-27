@@ -183,16 +183,11 @@ public class ExtendedQuadraticOptimizer extends QuadraticOptimizer {
             if (LOG_DEBUG) IMCSDialogLayout.consoleLog("solver.addConstraint("+equality.firstObject+", "+equality.secondObject+", -"+equality.weight+", -"+equality.weight+");//2b");
         }
 
-//        IMCSDialogLayout.consoleLog("double[] variables = solver.getSolution();");
-        
-        IMCSDialogLayout.printTime("imcs_de step 4");
         variables = solver.getSolution();
-        IMCSDialogLayout.printTime("imcs_de step 5");
 
         
         if (variables == null) {
         	IMCSDialogLayout.consoleLog("Cycle reducer found no solution.");
-            //throw new IllegalArgumentException("Cycle Reducer found no solution.");
         	return null;
         }
 
@@ -240,10 +235,7 @@ public class ExtendedQuadraticOptimizer extends QuadraticOptimizer {
 
         isInputCorrect = true;
 
-        IMCSDialogLayout.printTime("imcs_de step 6");
-
         double result[] = super.performOptimization();
-        IMCSDialogLayout.printTime("imcs_de step 7");
 
         // the zero variable is the last one
         double zeroX = result[variableCount - 1];

@@ -50,13 +50,13 @@
       <classpath>
         <pathelement location="js-minimizer/compiler.jar"/>
       </classpath>
-      <arg value="--js_output_file=imcs_layoutengine.min.js"/>
+      <arg value="--js_output_file=dist/imcs_layoutengine.min.js"/>
       <arg value="war/imcs_layoutengine/imcs_layoutengine.nocache.js"/>
     </java>
   </target>
 
   <target name="postprocessdev" depends="gwtc" description="postprocess javascript and cleanup" >
-    <copy file="war/imcs_layoutengine/imcs_layoutengine.nocache.js" tofile="imcs_layoutengine.js"/>
+    <copy file="war/imcs_layoutengine/imcs_layoutengine.nocache.js" tofile="dist/imcs_layoutengine.js"/>
   </target>
 
   <target name="buildmin" depends="postprocessmin,clean" description="Build this project (minimized)" />
@@ -65,12 +65,14 @@
 
   <target name="build" depends="postprocessdev,postprocessmin,clean" description="Build this project (dev version, not minimized)" />
 
+<!--
   <target name="deploy" depends="builddev" description="Build and deploy to webAppOS engines">
     <copy file="imcs_layoutengine.js" tofile="../../webappos/engines/DialogEngine.web/web-root/imcs_dialogvisualizer/lib/imcs_layoutengine.js"/>
     <copy file="imcs_layoutengine.js" tofile="../../webappos/engines/GraphDiagramEngine.web/web-root/imcs_diagrameditor/lib/imcs_layoutengine.js"/>
     <copy file="imcs_layoutengine.COPYING" tofile="../../webappos/engines/DialogEngine.web/web-root/imcs_dialogvisualizer/lib/imcs_layoutengine.COPYING"/>
     <copy file="imcs_layoutengine.COPYING" tofile="../../webappos/engines/GraphDiagramEngine.web/web-root/imcs_diagrameditor/lib/imcs_layoutengine.COPYING"/>
   </target>
+-->
 
   <target name="clean" description="Cleans this project">
     <delete dir="war" failonerror="false" />

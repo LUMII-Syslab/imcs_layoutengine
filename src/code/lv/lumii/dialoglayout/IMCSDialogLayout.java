@@ -316,7 +316,6 @@ public class IMCSDialogLayout {
 		}
 		
 		this.callback.afterLoad();
-		printTime("imcs_de step 2");
 		
 		ComponentBounds bounds = root.getComponentBounds();
 		
