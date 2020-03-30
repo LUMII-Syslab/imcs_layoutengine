@@ -1,0 +1,31 @@
+{
+  "name": "imcs_layoutengine",
+  "version": "1.0.0",
+  "description": "IMCS SysLab layout library for laying out graph diagrams and dialog windows.",
+  "main": "dist/imcs_layoutengine.min.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "build": "$(npm bin)/../../apache-ant/bin/ant",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LUMII-Syslab/imcs_layoutengine.git"
+  },
+  "keywords": [
+    "layout",
+    "dialog",
+    "diagram",
+    "imcs"
+  ],
+  "author": "IMCS, UL",
+  "license": "SEE LICENSE IN imcs_layoutengine.COPYING",
+  "bugs": {
+    "url": "https://github.com/LUMII-Syslab/imcs_layoutengine/issues"
+  },
+  "homepage": "https://webappos.org/dev/layout/",
+  "dependencies": {},
+  "devDependencies": {}
+}
