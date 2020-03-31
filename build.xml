@@ -34,6 +34,7 @@
       </classpath>
       <jvmarg value="-Xmx256M"/>
       <jvmarg value="-Dgwt.usearchives=false"/>
+<!--      <arg value="-XclosureFormattedOutput"/>-->
       <arg value="-style"/>
       <arg value="DETAILED"/>
       <arg value="-optimize"/>
@@ -41,6 +42,18 @@
       <arg value="-logLevel"/>
       <arg value="TRACE"/> <!--INFO-->
       <arg value="imcs_layoutengine"/>
+     
+    </java>
+  </target>
+  
+  <target name="gwttest" description="GWT compile to JavaScript">
+
+    <java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+      <classpath>
+        <pathelement location="src"/>
+        <path refid="project.class.path"/>
+        <pathelement location="gwt-awt"/>
+      </classpath>
      
     </java>
   </target>
@@ -56,7 +69,17 @@
   </target>
 
   <target name="postprocessdev" depends="gwtc" description="postprocess javascript and cleanup" >
-    <copy file="war/imcs_layoutengine/imcs_layoutengine.nocache.js" tofile="dist/imcs_layoutengine.js"/>
+    <copy file="war/imcs_layoutengine/imcs_layoutengine.nocache.js" tofile="dist/imcs_layoutengine.nocache.js"/>    
+    <echo file="dist/imcs_layoutengine.nocache.js" append="true">
+module.exports = {
+  IMCSDiagramLayout: window.IMCSDiagramLayout,
+  IMCSDialogLayout: window.IMCSDialogLayout,
+  default: {
+    IMCSDiagramLayout: window.IMCSDiagramLayout,
+    IMCSDialogLayout: window.IMCSDialogLayout
+  }
+};
+    </echo>
   </target>
 
   <target name="buildmin" depends="postprocessmin,clean" description="Build this project (minimized)" />

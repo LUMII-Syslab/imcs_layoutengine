@@ -1,23 +1,29 @@
-You shoud have Apache ant installed.
-
-If the gwt folder does not exist, download Google Web Toolkit (GWT)
-and extract it there.
-
-If the js-minimizer folder does not exist, download Google Closure Compiler
-and extract it there.
-
-To build the layout engine .js and .min.js files, just issue the "ant" command from
-this directory. The file will be put into this directory.
-
-To create just a minimized version, issue the "ant buildmin" command.
-To create just a non-minimized version, issue the "ant builddev" command.
-
+How to use the library
+======================
 Samples:
 * diagram_layout_sample.html - an example showing how to use the IMCSDiagramLayout class
 * dialog_layout_sample.html - an example showing how to use the IMCSDialogLayout class
 
+To use the library as a node.js/npm package:
+  1) install the package:
+     npm install @LUMII-Syslab/imcs_layoutengine --registry=https://npm.pkg.github.com
+  2) import it and use in your code:
+     import {IMCSDiagramLayout, IMCSDialogLayout} from '@LUMII-Syslab/imcs_layoutengine';
+
 In addition, you can use imcs_canvas.html to test the IMCSDiagramLayout class and
 visualize the diagram right away.
+
+How to compile from sources
+===========================
+You should have Java8+ installed (java command or JAVA_HOME envvar must be available).
+You should have npm installed (npm command must be available)
+
+You should have Apache ant installed in ./apache-ant.
+You should have Google Web Toolkit (GWT) installed in ./gwt.
+
+Then run:
+npm run build
+
 
 Licences
 --------
@@ -27,7 +33,6 @@ the following licenses:
 * W3C Java classes: src/code/org/w3c/COPYING (W3C liberal license)
 * GWT-AWT classes: gwt-awt/COPYING  (GPLv2 with the classpath exception)
 
-In addition, the tools used at compile time have the following licenses:
-* GWT: gwt/COPYING (Google Web Toolkit license)
-* JavaScript minimizer (Closure Compiler): js-minimizer/COPYING (Apache 2.0 license)
-
+In addition, the following libraries, which are used at compile time, have their own licenses:
+* GWT (Google Web Toolkit)
+* webpack (as npm module) and dependencies
