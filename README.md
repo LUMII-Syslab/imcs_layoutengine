@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/static/v1?message=GPLv2w/Classpath exception + W3C&color=brightgreen)](https://raw.githubusercontent.com/LUMII-Syslab/imcs_layoutengine/master/imcs_layoutengine.COPYING)
+[![License](https://img.shields.io/badge/license-GPLv2wCPE%2BW3C-brightgreen)](https://raw.githubusercontent.com/LUMII-Syslab/imcs_layoutengine/master/imcs_layoutengine.COPYING)
 
 # IMCS Layout Engine
 IMCS Layout Engine is a library for laying out graph diagrams and dialog windows.
