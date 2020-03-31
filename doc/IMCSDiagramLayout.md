@@ -25,7 +25,7 @@ returns whether the operation succeeded;
 
 **IMCSDiagramLayout.addLine(lineId, srcId, tgtId, options)**
 adds an orthogonal line connecting the two boxes with the given id-s to the layout; optional options are in the following format (default values are specified):
-```json
+```javascript
 {
   lineType: "ORTHOGONAL", // or "POLYLINE", or "STRAIGHT"
   startSides: 15, // =parseInt("1111", 2)=0b1111, see bit mask values below
