@@ -1,5 +1,8 @@
 How to use the library
 ======================
+Using a script tag:
+<script type="text/javascript" src="../dist/imcs_layoutengine.min.js"></script>
+
 Samples:
 * diagram_layout_sample.html - an example showing how to use the IMCSDiagramLayout class
 * dialog_layout_sample.html - an example showing how to use the IMCSDialogLayout class

@@ -4,3 +4,4 @@ js-minimizer/
 dist/imcs_layoutengine.nocache.js
 package-lock.json
 node_modules/
+.DS_Store
