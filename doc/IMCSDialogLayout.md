@@ -11,7 +11,7 @@ Additional information on how to use the layout or on the meaning of certain par
 You can initialize the corresponding instance using the JavaScript new operator:
 var dialogLayout = new IMCSDialogLayout(callback);
 
-The callback parameter is a JavaScript object, which defines certain functions for getting information about dialog components to be layed out. Each dialog component is referenced by an id (the rComponent parameter, which is a natural number). The callback functions are as follows:
+The callback parameter is a JavaScript object, which defines certain functions for getting information about dialog components to be layed out. Each dialog component is referenced by an id (the rComponent parameter, which is a natural number). The callback functions are as follows (all number values, including rComponent, should be integers):
 
 **getAnchor(rComponent)**
 
@@ -30,17 +30,14 @@ Creates a HTML (dojo, jQuery, or other) element for the given rComponent (but no
 
 If the component is being loaded asynchronously, call IMCSDialogLayout.loadStarted(rComponent) during load() and call IMCSDialogLayout.loadFinished(rComponent) when the component is fully loaded, e.g.,
 
+```javascript
 callback.load = function load(rComponent) {
-
   dialogLayout.loadStarted(rComponent);
-
   asyncFunctionToLoadComponent(rComponent, function(callback\_args) {
-
     dialogLayout.loadFinished(rComponent);
-
   });
-
 }
+```
 
 **getChildren(rComponent)**
 
