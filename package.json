@@ -1,6 +1,6 @@
 {
   "name": "@LUMII-Syslab/imcs_layoutengine",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "IMCS SysLab layout library for laying out graph diagrams and dialog windows.",
   "main": "dist/imcs_layoutengine.min.js",
   "directories": {
