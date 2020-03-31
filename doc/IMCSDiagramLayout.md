@@ -15,7 +15,7 @@ An important feature of the JavaScript implementation is that you specify intege
 
 ## IMCSDiagramLayout Methods
 
-Notice id&#39;s are of Java type long, but x, y, width and height are doubles.
+Please, notice that id&#39;s are of Java type long, but x, y, width and height are doubles.
 
 **IMCSDiagramLayout.addBox(boxId, x, y, w, h)**
 adds a box with the given id (some integer), x, y, width, and height to the layout;
@@ -27,17 +27,17 @@ returns whether the operation succeeded;
 adds an orthogonal line connecting the two boxes with the given id-s to the layout; optional options are in the following format (default values are specified):
 ```json
 {
-  lineType: &quot;ORTHOGONAL&quot;, // or &quot;POLYLINE&quot;, or &quot;STRAIGHT&quot;
-  startSides: 15, // =parseInt(&#39;1111&#39;, 2)=0b1111, see bit mask values below
-  endSides: 15, // =parseInt(&#39;1111&#39;, 2)=0b1111, see bit mask values below
+  lineType: "ORTHOGONAL", // or "POLYLINE", or "STRAIGHT"
+  startSides: 15, // =parseInt("1111", 2)=0b1111, see bit mask values below
+  endSides: 15, // =parseInt("1111", 2)=0b1111, see bit mask values below
 }
 ```
 
 Bit mask values:
 
-* 0b0001: top (if y=0 is on top) = min\_y = 1
+* 0b0001: top (if the y axis is oriented downwards) = min\_y = 1
 * 0b0010: right = 2
-* 0b0100: bottom (if y=0 is on top) = max\_y = 4
+* 0b0100: bottom (if the y axis is oriented downwards) = max\_y = 4
 * 0b1000: left = 8
 
 Returns whether the operation succeeded.
