@@ -57,8 +57,8 @@ visualize the diagram right away.
 The documentation below explains the API of the two classes IMCSDiagramLayout and IMCSDialogLayout using the JavaScript syntax.
 If you prefer to use the Java version, the syntax is similar.
 
-* [IMCSDiagramLayout](doc/IMCSDiagramLayout.md)
-* [IMCSDialogLayout](doc/IMCSDialogLayout.md)
+* [IMCSDiagramLayout](https://github.com/LUMII-Syslab/imcs_layoutengine/blob/master/doc/IMCSDiagramLayout.md)
+* [IMCSDialogLayout](https://github.com/LUMII-Syslab/imcs_layoutengine/blob/master/doc/IMCSDialogLayout.md)
 
 The initial low-level Java code lays in the package lv.lumii.layoutengine. The documentation (JavaDoc) for it can be found in the folder doc/internal\_javadoc.
 
