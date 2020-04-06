@@ -9,7 +9,9 @@ Additional information on how to use the layout or on the meaning of certain par
 2. Kozlovics, S.: Calculating The Layout For Dialog Windows Specified As Models. In: Scientific Papers, University of Latvia. vol. 787, pp. 106-124 (2012)
 
 You can initialize the corresponding instance using the JavaScript new operator:
+```javascript
 var dialogLayout = new IMCSDialogLayout(callback);
+```
 
 The callback parameter is a JavaScript object, which defines certain functions for getting information about dialog components to be layed out. Each dialog component is referenced by an id (the rComponent parameter, which is a natural number). The callback functions are as follows (all number values, including rComponent, should be integers):
 
@@ -33,7 +35,7 @@ If the component is being loaded asynchronously, call IMCSDialogLayout.loadStart
 ```javascript
 callback.load = function load(rComponent) {
   dialogLayout.loadStarted(rComponent);
-  asyncFunctionToLoadComponent(rComponent, function(callback\_args) {
+  asyncFunctionToLoadComponent(rComponent, function(callback_args) {
     dialogLayout.loadFinished(rComponent);
   });
 }
