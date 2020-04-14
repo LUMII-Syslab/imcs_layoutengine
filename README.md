@@ -100,6 +100,8 @@ The compiled JavaScript file is built from the code having the following license
 * W3C Java classes: src/code/org/w3c/COPYING (W3C liberal license)
 * GWT-AWT classes: gwt-awt/COPYING  (GPLv2 with Classpath exception)
 
+The W3C and GWT-AWT classes are only required for the JavaScript version. For the Java code, the Java Virtual Machine provides them; thus, the license of Java applies there.
+
 In addition, the following libraries, which are used at compile time, have their own licenses:
 * GWT (Google Web Toolkit)
 * webpack (as npm module) and dependencies
