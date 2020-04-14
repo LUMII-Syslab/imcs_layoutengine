@@ -7,12 +7,27 @@ IMCS Layout Engine is a JavaScript library for laying out graph diagrams and dia
 - It uses fast quadratic optimization algorithm
 - It is open-source
 
-The initial Java version was low-level and not suitable for execution is web browsers.
-Thus, Sergejs Kozlovičs developed two wrappers over the initial low-level Java code. Furthermore,
-he created glue code and non-trivial build scripts for transpiling Java sources to JavaScript.
+## Contributors & History
+The following people contributed to the Java version (it was initially written in C/C++ and later ported to Java):
+- Kārlis Freivalds
+- Paulis Ķikusts,
+- Krišjānis Prūsis
+- Jevgēņijs Vihrovs
+- Jans Glagoļevs
+- Pēteris Ručevskis
+- Sergejs Kozlovičs
+- Mikus Grasmanis
+
+The Java version was still low-level and not suitable for execution in web browsers.
+Thus, Sergejs Kozlovičs developed two higher-level Java wrappers and transpiled them to JavaScript.
+
+We include:
+- the low-level Java code
+- higher-level Java wrappers
+- glue code and build scripts for transpiling Java sources to JavaScript
 
 ## Java classes
- The higher-level wrappers over the initial low-level code are located in the Java packages lv.lumii.diagramlayout and lv.lumii.dialoglayout. The wrappers provide two Java classes:
+The higher-level wrappers over the initial low-level code are located in the Java packages lv.lumii.diagramlayout and lv.lumii.dialoglayout. The wrappers provide two Java classes:
 - IMCSDiagramLayout for laying out graph diagrams, and
 - IMCSDialogLayout for laying out dialog windows.
  
@@ -20,7 +35,6 @@ It is advised to use these wrappers instead of the initial low-level code (unles
 
 ## JavaScript module
 The JS module imcs_layoutengine.min.js provides two JavaScript "classes" (objects that support the "new" operator) with the same names as the corresponding Java classes: IMCSDiagramLayout and IMCSDialogLayout.
-
 
 ## How to import the library
 
@@ -81,8 +95,7 @@ npm run build
 ```
 
 ## Licences
-The compiled JavaScript files are built from the code having
-the following licenses:
+The compiled JavaScript file is built from the code having the following licenses:
 * IMCS layout engine Java classes: src/code/lv/lumii/COPYING (GPLv2 or later with Classpath exception)
 * W3C Java classes: src/code/org/w3c/COPYING (W3C liberal license)
 * GWT-AWT classes: gwt-awt/COPYING  (GPLv2 with Classpath exception)
@@ -93,6 +106,15 @@ In addition, the following libraries, which are used at compile time, have their
 
 ## Publications on IMCS Layout Engine Algorithm and Its Usage
 
-* K. Freivalds, P. Kikusts Optimum Layout Adjustment Supporting Ordering Constraints in Graph-Like Diagram Drawing. Proc. of the Latvian Academy of Sciences, Section B, Vol. 55 (2001), No. 1.
+* K. Freivalds, U. Dogrusoz, P. Kikusts. Disconnected graph layout and the polyomino packing approach. International Symposium on Graph Drawing, 378-391.
+  - src/code/lv/lumii/layoutengine/ConnectedComponentPacking.java
+  - src/code/lv/lumii/layoutengine/polyomino/*
+* K. Freivalds, J. Glagoļevs. Graph compact orthogonal layout algorithm. International Symposium on Combinatorial Optimization, 255-266.
+  - src/code/lv/lumii/layoutengine/UniversalLayoutAlgorithm.java
+  - src/code/lv/lumii/layoutengine/universalLayout/*
+* K. Freivalds, P. Kikusts. Optimum Layout Adjustment Supporting Ordering Constraints in Graph-Like Diagram Drawing. Proc. of the Latvian Academy of Sciences, Section B, Vol. 55 (2001), No. 1.
+  - src/code/lv/lumii/layoutengine/funcmin/*
 * S. Kozlovics. A Dialog Engine Metamodel for the Transformation-Driven Architecture. In: Scientific Papers, University of Latvia. vol. 756, pp. 151-170 (2010)
+  - src/code/lv/lumii/dialoglayout
 * S. Kozlovics. Calculating The Layout For Dialog Windows Specified As Models. In: Scientific Papers, University of Latvia. vol. 787, pp. 106-124 (2012)
+  - src/code/lv/lumii/dialoglayout

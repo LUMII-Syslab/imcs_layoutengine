@@ -1,6 +1,10 @@
 /*
 *
 * Copyright (c) 2013-2015 Institute of Mathematics and Computer Science, University of Latvia (IMCS UL). 
+* Relevant scientific paper:
+*   Disconnected graph layout and the polyomino packing approach
+*   K. Freivalds, U. Dogrusoz, P. Kikusts
+*   International Symposium on Graph Drawing, 378-391
 *
 * This file is part of layoutengine
 *

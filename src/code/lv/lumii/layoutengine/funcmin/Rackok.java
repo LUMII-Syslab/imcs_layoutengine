@@ -1,6 +1,10 @@
 /*
 *
 * Copyright (c) 2013-2015 Institute of Mathematics and Computer Science, University of Latvia (IMCS UL). 
+* Relevant scientific paper:
+*   Optimum Layout Adjustment Supporting Ordering Constraints in Graph-Like Diagram Drawing
+*   K. Freivalds, P. Kikusts 
+*   Proc. of the Latvian Academy of Sciences, Section B, Vol. 55 (2001), No. 1.
 *
 * This file is part of layoutengine
 *

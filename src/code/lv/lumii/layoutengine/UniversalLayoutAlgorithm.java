@@ -1,6 +1,10 @@
 /*
 *
 * Copyright (c) 2013-2015 Institute of Mathematics and Computer Science, University of Latvia (IMCS UL). 
+* Relevant scientific paper:
+*   Graph compact orthogonal layout algorithm 
+*   K. Freivalds, J. Glagoļevs
+*   International Symposium on Combinatorial Optimization, 255-266
 *
 * This file is part of layoutengine
 *

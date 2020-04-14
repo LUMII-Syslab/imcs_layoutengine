@@ -1,3 +1,22 @@
+/*
+*
+* Copyright (c) 2013-2020 Institute of Mathematics and Computer Science, University of Latvia (IMCS UL). 
+* Relevant scientific papers:
+*  - S. Kozlovics. A Dialog Engine Metamodel for the Transformation-Driven Architecture. In: Scientific Papers, University of Latvia. vol. 756, pp. 151-170 (2010)
+*  - S. Kozlovics. Calculating The Layout For Dialog Windows Specified As Models. In: Scientific Papers, University of Latvia. vol. 787, pp. 106-124 (2012)
+
+* This file is part of layoutengine
+*
+* You can redistribute it and/or modify it under the terms of the GNU General Public License 
+* as published by the Free Software Foundation, either version 2 of the License,
+* or (at your option) any later version.
+*
+* This file is also subject to the "Classpath" exception as mentioned in
+* the COPYING file that accompanied this code.
+*
+* You should have received a copy of the GNU General Public License along with layoutengine. If not, see http://www.gnu.org/licenses/.
+*
+*/
 package lv.lumii.dialoglayout.components;
 
 import lv.lumii.layoutengine.funcmin.ExtendedQuadraticOptimizer;
@@ -8,21 +27,19 @@ import lv.lumii.dialoglayout.components.utils.Layout;
 public class HorizontalBox extends Component {
 
 	public void writeGravity(ExtendedQuadraticOptimizer eqo, double coeff) {
-		//get children count
-		int comp_count=getChildren().length;
 		//stores references to first and last child
 		Component first=null;
 		Component last=null;
 		
-		double newCoeff = coeff/2/(comp_count+1);
+		double newCoeff = Layout.getChildGravity(coeff, children.size());
 		
 		//for every child
 		for (Component child:getChildren()) {
 			ComponentBounds childBounds=child.getComponentBounds();
 			
 			//add gravity to form's top and bottom borders
-			eqo.addLinearDifference(bounds.xt, childBounds.xt, newCoeff);
-			eqo.addLinearDifference(childBounds.xb, bounds.xb, newCoeff);
+			eqo.addLinearDifference(bounds.xt, childBounds.xt, newCoeff*Layout.GRAVITY_WEIGHT_ADJUSTMENT);
+			eqo.addLinearDifference(childBounds.xb, bounds.xb, newCoeff*Layout.GRAVITY_WEIGHT_ADJUSTMENT);
 			
 			//add child's inner gravity, update the gravity coefficient so that it wouldn't affect the form itself
 			child.writeGravity(eqo, newCoeff);
@@ -35,14 +52,10 @@ public class HorizontalBox extends Component {
 		
 		//add gravity to form's left and right borders
 		if (first!=null) {
-			//eqo.addReducibleInequality(bounds.xl, first.getComponentBounds().xl, 0, -Layout.INFINITY);
-			eqo.addEquality(first.getComponentBounds().xl, bounds.xl, 0);
-			//eqo.addLinearDifference(bounds.xl, first.getComponentBounds().xl, coeff);
+			eqo.addLinearDifference(bounds.xl, first.getComponentBounds().xl, coeff);
 		}
 		if (last!=null) {
-			//eqo.addReducibleInequality(last.getComponentBounds().xr, bounds.xr, 0, -Layout.INFINITY);
-			eqo.addEquality(bounds.xr, last.getComponentBounds().xr, 0);
-			//eqo.addLinearDifference(last.getComponentBounds().xr, bounds.xr, coeff);
+			eqo.addLinearDifference(last.getComponentBounds().xr, bounds.xr, coeff);
 		}
 	}
 	
@@ -75,12 +88,12 @@ public class HorizontalBox extends Component {
 				firstChild=child;
 			
 			//consider vertical padding and vertical alignment
-			if (child.getClass()!=Row.class && bounds.verAlign.equals("TOP"))
+			if (bounds.verAlign.equals("TOP"))
 				eqo.addEquality(bounds.xt, childBounds.xt, bounds.topP+childBounds.topM);
 			else
 				eqo.addInequality(bounds.xt, childBounds.xt, bounds.topP+childBounds.topM);
 			
-			if (child.getClass()!=Row.class && bounds.verAlign.equals("BOTTOM"))
+			if (bounds.verAlign.equals("BOTTOM"))
 				eqo.addEquality(childBounds.xb, bounds.xb, bounds.bottomP+childBounds.bottomM);
 			else
 				eqo.addInequality(childBounds.xb, bounds.xb, bounds.bottomP+childBounds.bottomM);
@@ -94,20 +107,18 @@ public class HorizontalBox extends Component {
 			
 		if (firstChild!=null) {
 			//consider horizontal padding and horizontal alignment
-			if (firstChild.getClass()!=Column.class && bounds.horAlign.equals("LEFT"))
+			if (bounds.horAlign.equals("LEFT"))
 				eqo.addEquality(bounds.xl, firstChild.getComponentBounds().xl,bounds.leftP+firstChild.getComponentBounds().leftM);
-			//else
-				//eqo.addInequality(bounds.xl, firstChild.getComponentBounds().xl,bounds.leftP+firstChild.getComponentBounds().leftM);
+			else
+				eqo.addInequality(bounds.xl, firstChild.getComponentBounds().xl,bounds.leftP+firstChild.getComponentBounds().leftM);
 			
-			if (firstChild.getClass()!=Column.class && bounds.horAlign.equals("RIGHT"))
+			if (bounds.horAlign.equals("RIGHT"))
 				eqo.addEquality(prevChild.getComponentBounds().xr,bounds.xr,bounds.rightP+prevChild.getComponentBounds().rightM);
-			//else
-				//eqo.addInequality(prevChild.getComponentBounds().xr,bounds.xr,bounds.rightP+prevChild.getComponentBounds().rightM);
+			else
+				eqo.addInequality(prevChild.getComponentBounds().xr,bounds.xr,bounds.rightP+prevChild.getComponentBounds().rightM);
 			
 			if (bounds.horAlign.equals("CENTER"))
 				eqo.addDoubleMeanDifference(bounds.xl, bounds.xr, firstChild.getComponentBounds().xl, lastChild.getComponentBounds().xr, Layout.ALIGNEMENTWEIGHT*1000);
-			else
-				eqo.addDoubleMeanDifference(bounds.xl, bounds.xr, firstChild.getComponentBounds().xl, lastChild.getComponentBounds().xr, Layout.ALIGNEMENTWEIGHT);
 		}
 	}
 
