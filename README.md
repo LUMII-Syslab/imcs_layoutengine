@@ -8,7 +8,7 @@ IMCS Layout Engine is a JavaScript library for laying out graph diagrams and dia
 - It is open-source
 
 ## Contributors & History
-The following people contributed to the Java version (it was initially written in C/C++ and later ported to Java):
+The following people contributed to the Java version (some portions were initially written in C/C++ and later ported to Java):
 - Kārlis Freivalds
 - Paulis Ķikusts,
 - Krišjānis Prūsis
