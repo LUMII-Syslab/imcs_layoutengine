@@ -340,11 +340,17 @@ public class IMCSDialogLayout {
 		ComponentBounds bounds = root.getComponentBounds();
 		
 		// trying to minimize the form size
-		if (bounds.preW == null)
+		/*if (bounds.preW == null)
 			bounds.preW = prefFormWidth;
 		if (bounds.preH == null) 
 			bounds.preH = prefFormHeight;
 		
+		if ((prefFormWidth>0) && (bounds.minW==null))
+			bounds.minW = prefFormWidth;
+		
+		if ((prefFormHeight>0) && (bounds.minH==null))
+			bounds.minH = prefFormHeight;
+		*/
 		//get number of variables
 		
 		int n;
@@ -361,15 +367,30 @@ public class IMCSDialogLayout {
     		eqo.setVariable(k, initialValues.get(k));
     	}
     	eqo.setEpsilon(0.1);
+
+    	// trying to keep the form's original size...
+    	if (!needsResize) {
+    		/*if (bounds.preW == null)
+    			bounds.preW = prefFormWidth;
+    		if (bounds.preH == null) 
+    			bounds.preH = prefFormHeight;
+    		*/
+    		if (prefFormWidth>0)
+    			bounds.minW = prefFormWidth;
+    		
+    		if (prefFormHeight>0)
+    			bounds.minH = prefFormHeight;
+		}
     	
     	//consider form and it's children
     	root.writeConstraints(eqo);
     	
     	//consider groups
-		if (needsResize)
+		if (needsResize) {
 	    	for (RelativeGroup group:groups.values()) {
 	    		group.writeConstraints(eqo);
 	    	}
+		}
     	
     	//get a solution
 		
@@ -429,14 +450,13 @@ public class IMCSDialogLayout {
 		cmpnt.destroyChildrenRecursively(callback);
 		
 
-		consoleLog("in refreshAndLayout "+formWidth+" "+formHeight);
-		// TODO: resetBoundsRecursively()
+		//consoleLog("in refreshAndLayout "+formWidth+" "+formHeight);
 		//root.clearBoundsRecursively();
 		
 		this.callback.beforeLoad(rComponent);
 		cmpnt.reinitialize(); // re-loads this and children
 		
-		getBoundsAndLayoutComponents(true, formWidth, formHeight);
+		getBoundsAndLayoutComponents(false, formWidth, formHeight);
 	}
 	
 	public void refreshAndLayout(double rRootComponent, int formWidth, int formHeight) { // compatibility with JavaScript

@@ -101,7 +101,7 @@ public abstract class Component { // base class
 		
 		for (Component child : children) {
 			child.destroyChildrenRecursively(_callback);
-			if (_callback != null)
+			if ((_callback != null) && (child.reference!=0))
 				_callback.destroy(child.reference);
 		}
 		children.clear();
