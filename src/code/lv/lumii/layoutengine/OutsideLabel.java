@@ -22,6 +22,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+import lv.lumii.dialoglayout.IMCSDialogLayout;
 import lv.lumii.layoutengine.Box.BoxSide;
 import lv.lumii.layoutengine.LayoutConstraints.*;
 import lv.lumii.layoutengine.Line.LineType;
@@ -183,6 +185,8 @@ public abstract class OutsideLabel extends Label {
         setCenter(new Point2D.Double(rectangle.getCenterX(), rectangle.getCenterY()));
 
         userMinWidth = rectangle.getWidth();
+        
+        
         userMinHeight = rectangle.getHeight();
 
         setCurrentMinSize(userMinWidth, userMinHeight);
@@ -219,8 +223,6 @@ public abstract class OutsideLabel extends Label {
         }
 
         userMinWidth = width;
-        userMinHeight = height;
-
         setCurrentMinSize(userMinWidth, userMinHeight);
 
         getDiagram().layoutModifyLabel(this);

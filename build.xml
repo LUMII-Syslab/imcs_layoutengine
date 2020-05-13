@@ -71,14 +71,16 @@
   <target name="postprocessdev" depends="gwtc" description="postprocess javascript and cleanup" >
     <copy file="war/imcs_layoutengine/imcs_layoutengine.nocache.js" tofile="dist/imcs_layoutengine.nocache.js"/>    
     <echo file="dist/imcs_layoutengine.nocache.js" append="true">
-module.exports = {
-  IMCSDiagramLayout: window.IMCSDiagramLayout,
-  IMCSDialogLayout: window.IMCSDialogLayout,
-  default: {
+if (typeof module !== "undefined") {
+  module.exports = {
     IMCSDiagramLayout: window.IMCSDiagramLayout,
-    IMCSDialogLayout: window.IMCSDialogLayout
-  }
-};
+    IMCSDialogLayout: window.IMCSDialogLayout,
+    default: {
+      IMCSDiagramLayout: window.IMCSDiagramLayout,
+      IMCSDialogLayout: window.IMCSDialogLayout
+    }
+  };
+}
     </echo>
   </target>
 

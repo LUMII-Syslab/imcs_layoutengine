@@ -20,6 +20,8 @@ package lv.lumii.layoutengine;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.LinkedHashMap;
+
+import lv.lumii.dialoglayout.IMCSDialogLayout;
 import lv.lumii.layoutengine.Box.BoxSide;
 import lv.lumii.layoutengine.LayoutConstraints.*;
 import lv.lumii.layoutengine.OutsideLabel.BoxOutsideLabel;
@@ -116,7 +118,7 @@ public abstract class Label extends AbstractContainer implements Rectangular {
         this.minWidth = Math.max(this.minWidth, userMinWidth);
         if (userMinWidth > getWidth()) {
             resize(new Rectangle2D.Double(left - (userMinWidth - getWidth()) / 2, top, userMinWidth, bottom - top));
-        }
+        }        
     }
 
     /**
@@ -139,7 +141,7 @@ public abstract class Label extends AbstractContainer implements Rectangular {
         if (userMinHeight > oldHeight || userMinWidth > oldWidth) {
             resize(new Rectangle2D.Double(newLeft, newTop, newWidth, newHeight));
         }
-    }
+       }
 
     /**
      * Converts this label to an inside label belonging to the new owner. Copies all parameters and
