@@ -249,13 +249,20 @@ public class IMCSDiagramLayout {
 
 					jPoints.add(p);
 				}
-				try { // try-catch by SK
-					jLine = private_addLineWithPoints(jSrc, jTgt, lineType, jPoints);
-					points = null;
-				} catch (Throwable t) {
-					jLine = private_addLine(jSrc, jTgt, lineType); // with tracing
-					points = null;
-				}
+				
+				//if ((startSides != 15) || (endSides != 15))
+				//	jLine = private_addLine(jSrc, jTgt, lineType); // with tracing; add points later...
+				//else {
+					// add points now..
+					try { // try-catch by SK
+						jLine = private_addLineWithPoints(jSrc, jTgt, lineType, jPoints);
+						jLine.setPoints(jPoints);
+						points = null;
+					} catch (Throwable t) {
+						jLine = private_addLine(jSrc, jTgt, lineType); // re-trace on exception...
+						points = null;
+					}
+				//}
 			} else {
 				jLine = private_addLine(jSrc, jTgt, lineType); // with tracing
 			}
@@ -627,9 +634,77 @@ public class IMCSDiagramLayout {
 				this.jDiagram.startTransaction();
 				this.transactionStarted = true;
 			}
+					
 
 			ArrayList<OutsideLabel.LineLabel> jLabels = jLine.getLabels();
 			int n = jLabels.size();
+
+			// some exception (and reroute) fix: 
+			
+			boolean hasLabels = false;//(n > 0);
+			if (hasLabels) { // delete and re-create the line...
+				Line newLine;
+
+				if (points != null) {
+					ArrayList<Point2D.Double> jPoints = new ArrayList<Point2D.Double>();
+					for (int i = 0; i < points.size(); i++) {
+						Point2D.Double p = new Point2D.Double();
+						p.setLocation(points.get(i));
+						if (this.transposeXY) {
+							double t = p.x;
+							p.x = p.y;
+							p.y = t;
+						}
+						if (this.inverseY) {
+							p.y = this.maxY - p.y;
+						} else {
+							p.y = this.minY + p.y;
+						}
+						p.x = this.minX + p.x;
+						jPoints.add(p);
+					}
+					newLine = ((Box) jPrevSrc).connectTo((Box) jPrevTgt, jLine.getType(), 5, points);
+				} else
+					newLine = ((Box) jPrevSrc).connectTo((Box) jPrevTgt, jLine.getType(), 5);
+				
+				this.jDiagram.endTransaction();
+				this.jDiagram.startTransaction();
+				this.transactionStarted = true;
+
+				for (int i = 0; i < n; i++) {
+					OutsideLabel.LineLabel jLabel = jLabels.get(i);
+
+					double w = jLabel.getWidth();
+					double h = jLabel.getHeight();
+					double p = jLabel.getPosition();
+					OutsideLabel.LineLabel.Orientation o = jLabel.getOrientation();
+
+					OutsideLabel.LineLabel newLabel = newLine.createLabel(w, h, p, o,
+							lv.lumii.layoutengine.LayoutConstraints.ConstraintType.NONE, 2.0);
+
+					Long labelId = this.lineLabelsInvMap.get(jLabel);
+					if (labelId != null) {
+						lineLabelsMap.remove(labelId);
+						lineLabelsInvMap.remove(jLabel);
+					}
+
+					lineLabelsMap.put(labelId, newLabel);
+					lineLabelsInvMap.put(newLabel, labelId);
+				}
+
+// removing the previous line (with old labels)...                                
+				this.linesMap.remove(lineId);
+				this.linesInvMap.remove(jLine);
+				jLine.remove(false);
+
+// associating the new line... 
+				this.linesMap.put(lineId, newLine);                
+				this.linesInvMap.put(newLine, lineId);
+				
+				this.jDiagram.endTransaction();
+				this.jDiagram.startTransaction();
+				this.transactionStarted = true;
+			} else
 
 			/*
 			 * // some exception fix: boolean hasLabels = (n>0); if (hasLabels) { // delete
@@ -746,7 +821,7 @@ public class IMCSDiagramLayout {
 		this.jDiagram.arrange();
 		resetLineLabels();
 		return arrangeIncrementally();
-		//return this.getLayout();
+		// return this.getLayout();
 	}
 
 	private void resetLineLabels() {
@@ -764,25 +839,23 @@ public class IMCSDiagramLayout {
 				}
 
 				OutsideLabel.LineLabel jLabel = jLabels.get(j);
-				
-				//jLabel.setMinWidth(jLabel.getMinWidth());
+
+				// jLabel.setMinWidth(jLabel.getMinWidth());
 				Long labelId = this.lineLabelsInvMap.get(jLabel);
-/*				double w = jLabel.getWidth();
-				double h = jLabel.getHeight();
-				double p = jLabel.getPosition();
-				OutsideLabel.LineLabel.Orientation or = jLabel.getOrientation();
-
-				OutsideLabel.LineLabel newLabel = o.createLabel(w, h, p, or,
-						lv.lumii.layoutengine.LayoutConstraints.ConstraintType.NONE, 2.0);
-
-				Long labelId = this.lineLabelsInvMap.get(jLabel);
-				if (labelId != null) {
-					lineLabelsMap.remove(labelId);
-					lineLabelsInvMap.remove(jLabel);
-				}
-
-				lineLabelsMap.put(labelId, newLabel);
-				lineLabelsInvMap.put(newLabel, labelId);*/
+				/*
+				 * double w = jLabel.getWidth(); double h = jLabel.getHeight(); double p =
+				 * jLabel.getPosition(); OutsideLabel.LineLabel.Orientation or =
+				 * jLabel.getOrientation();
+				 * 
+				 * OutsideLabel.LineLabel newLabel = o.createLabel(w, h, p, or,
+				 * lv.lumii.layoutengine.LayoutConstraints.ConstraintType.NONE, 2.0);
+				 * 
+				 * Long labelId = this.lineLabelsInvMap.get(jLabel); if (labelId != null) {
+				 * lineLabelsMap.remove(labelId); lineLabelsInvMap.remove(jLabel); }
+				 * 
+				 * lineLabelsMap.put(labelId, newLabel); lineLabelsInvMap.put(newLabel,
+				 * labelId);
+				 */
 			}
 		}
 	}

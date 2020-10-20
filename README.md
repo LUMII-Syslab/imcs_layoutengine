@@ -49,9 +49,14 @@ The JS module imcs_layoutengine.min.js provides two JavaScript "classes" (object
 ```
 
 ### Using as a node.js/npm package:
+  0) create the .npmrc file (in your npm project dir) with the following content:
+     ```
+     @LUMII-Syslab:registry=https://npm.pkg.github.com/
+     //npm.pkg.github.com/:_authToken=4aa7552db9c09af3af9a61bf606d447f9d0d0ae6
+     ```
   1) install the package:
      ```bash
-     npm install @LUMII-Syslab/imcs_layoutengine --registry=https://npm.pkg.github.com
+     npm install --save-dev @LUMII-Syslab/imcs_layoutengine
      ```
   2) import it and use in your code:
      ```bash
