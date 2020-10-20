@@ -52,8 +52,12 @@ The JS module imcs_layoutengine.min.js provides two JavaScript "classes" (object
   0) create the .npmrc file (in your npm project dir) with the following content:
      ```
      @LUMII-Syslab:registry=https://npm.pkg.github.com/
-     //npm.pkg.github.com/:_authToken=4aa7552db9c09af3af9a61bf606d447f9d0d0ae6
+     //npm.pkg.github.com/:_authToken=PERSONAL_GITHUB_ACCESS_TOKEN
      ```
+     To obtain PERSONAL_GITHUB_ACCESS_TOKEN, log in to GitHub, click on the user icon in
+     the top right corner, choose Settings, then Developer settings, then Personal access tokens.
+     Generate a new token having at least the "read:packages" permission.
+     Then copy and paste it as PERSONAL_GITHUB_ACCESS_TOKEN.
   1) install the package:
      ```bash
      npm install --save-dev @LUMII-Syslab/imcs_layoutengine
